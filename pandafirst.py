@@ -19,8 +19,14 @@ import numpy as np
 
 # S1 = pd.Series([1, 2, 3, 4])
 # S2 = pd.Series([5, 6, 7, 8])
-S1 = pd.Series([1, 2, 3, 4], index = ['A', 'B', 'C', 'D'])
-S2 = pd.Series([5, 6, 7, 8], index = ['A', 'C', 'F', 'G'])
+# S1 = pd.Series([1, 2, 3, 4], index = ['A', 'B', 'C', 'D'])
+# S2 = pd.Series([5, 6, 7, 8], index = ['A', 'C', 'F', 'G'])
 # print(S1+S2)
-print(S1.add(S2, fill_value=0))
-print(S1.sub(S2, fill_value=0))
+# print(S1.add(S2, fill_value=0))
+# print(S1.sub(S2, fill_value=0))
+
+L1 = [1, 2, 3, 4, 5]
+L2 = [10, 2, 3, 4, 5]
+L3 = [100, 2, 3, 4, 5]
+D = pd.DataFrame([L1, L2, L3], columns=['A', 'B', 'C', 'D', 'E'], index=[2000, 3000, 4000])
+print(D)
