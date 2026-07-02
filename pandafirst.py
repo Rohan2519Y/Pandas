@@ -25,8 +25,13 @@ import numpy as np
 # print(S1.add(S2, fill_value=0))
 # print(S1.sub(S2, fill_value=0))
 
-L1 = [1, 2, 3, 4, 5]
-L2 = [10, 2, 3, 4, 5]
-L3 = [100, 2, 3, 4, 5]
-D = pd.DataFrame([L1, L2, L3], columns=['A', 'B', 'C', 'D', 'E'], index=[2000, 3000, 4000])
-print(D)
+# L1 = [1, 2, 3, 4, 5]
+# L2 = [10, 2, 3, 4, 5]
+# L3 = [100, 2, 3, 4, 5]
+# D = pd.DataFrame([L1, L2, L3], columns=['A', 'B', 'C', 'D', 'E'], index=[2000, 3000, 4000])
+# print(D)
+
+# D = [{'1':'A', '2':'B'}, {'1':'C', '2':'D'}, {'1':'E', '2':'F'}]
+D = pd.DataFrame({'100':{'1':'A', '2':'B'}, '200':{'1':'C', '2':'D'}, '300':{'1':'E', '2':'F'}})
+# print(pd.DataFrame(D))
+print(D.loc['1'])
