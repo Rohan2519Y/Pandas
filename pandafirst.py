@@ -32,6 +32,25 @@ import numpy as np
 # print(D)
 
 # D = [{'1':'A', '2':'B'}, {'1':'C', '2':'D'}, {'1':'E', '2':'F'}]
-D = pd.DataFrame({'100':{'1':'A', '2':'B'}, '200':{'1':'C', '2':'D'}, '300':{'1':'E', '2':'F'}})
+# D = pd.DataFrame({'100':{'1':'A', '2':'B'}, '200':{'1':'C', '2':'D'}, '300':{'1':'E', '2':'F'}})
 # print(pd.DataFrame(D))
-print(D.loc['1'])
+dictForest = {'State': ['Assam', 'Delhi', 'Kerala'], 'GArea': [78438, 1483, 38852] ,'VDF' : [2797, 6.72,1663]}
+# D = pd.DataFrame(dictForest)
+# D = pd.DataFrame(dictForest, columns = ['State','VDF', 'GArea'])
+
+ResultSheet={'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi']),
+'Ramit': pd.Series([92, 81, 96],index=['Maths','Science','Hindi']), 
+'Samridhi': pd.Series([89, 91, 88], index=['Maths','Science','Hindi']),
+'Riya': pd.Series([81, 71, 67],index=['Maths','Science','Hindi']), 
+'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])}
+
+ResultDF = pd.DataFrame(ResultSheet)
+ResultDF.loc['English'] = [85, 86, 83, 80, 90]
+ResultDF.loc['Maths'] = 0
+# print(ResultDF)
+
+
+dFrame10Mu1tip1es = pd.DataFrame([10, 20, 30 , 40, 50])
+# print(dFrame10Mu1tip1es.loc[2])
+# print(ResultDF.loc[:, 'Arnab'])
+# print(ResultDF.loc[['Science', 'Maths']])
