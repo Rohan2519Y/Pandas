@@ -45,12 +45,33 @@ ResultSheet={'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi'])
 'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])}
 
 ResultDF = pd.DataFrame(ResultSheet)
-ResultDF.loc['English'] = [85, 86, 83, 80, 90]
-ResultDF.loc['Maths'] = 0
+# ResultDF.loc['English'] = [85, 86, 83, 80, 90]
+# ResultDF.loc['Maths'] = 0
 # print(ResultDF)
+# print(ResultDF.loc['Maths'] > 90)
+# print(ResultDF.loc['Maths':'Science', 'Arnab'])
+# print(ResultDF.T) # Transpose
+# print(ResultDF.head(2))
+# print(ResultDF.tail(2))
 
 
 dFrame10Mu1tip1es = pd.DataFrame([10, 20, 30 , 40, 50])
 # print(dFrame10Mu1tip1es.loc[2])
 # print(ResultDF.loc[:, 'Arnab'])
 # print(ResultDF.loc[['Science', 'Maths']])
+
+
+# ResultSheet1=pd.DataFrame({'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi']),
+# 'Ramit': pd.Series([92, 81, 96],index=['Maths','Science','Hindi']), 
+# 'Samridhi': pd.Series([89, 91, 88], index=['Maths','Science','Hindi']),
+# 'Riya': pd.Series([81, 71, 67],index=['Maths','Science','Hindi']), 
+# 'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])})
+
+# ResultSheet2=pd.DataFrame({'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi']),
+# 'Ramit': pd.Series([92, 81, 96],index=['Maths','Science','Hindi']), 
+# 'Samridhi': pd.Series([89, 91, 88], index=['Maths','Science','Hindi']),
+# 'Riya': pd.Series([81, 71, 67],index=['Maths','Science','Hindi']), 
+# 'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])})
+
+# L = pd.concat([ResultSheet1, ResultSheet2])
+# print(L)
