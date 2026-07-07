@@ -53,6 +53,19 @@ ResultDF = pd.DataFrame(ResultSheet)
 # print(ResultDF.T) # Transpose
 # print(ResultDF.head(2))
 # print(ResultDF.tail(2))
+# print(ResultDF.info())
+# print(ResultDF.describe())
+# print(ResultDF.iloc[0:3, [0, 2]])
+# print(ResultDF.axes)
+# print(ResultDF.rank())
+# print(ResultDF.rank(ascending=False))
+# print(ResultDF.sort_values(by=['Arnab']))
+# print(ResultDF.sort_values(by=['Maths'], ascending=False, axis=1))
+# print(ResultDF.sort_index())
+# for V in ResultDF.items():
+#     print(V)
+# for V in ResultDF.iterrows():
+#     print(V)
 
 
 dFrame10Mu1tip1es = pd.DataFrame([10, 20, 30 , 40, 50])
