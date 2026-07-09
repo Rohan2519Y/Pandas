@@ -66,6 +66,16 @@ ResultDF = pd.DataFrame(ResultSheet)
 #     print(V)
 # for V in ResultDF.iterrows():
 #     print(V)
+# print(ResultDF.count())
+# print(ResultDF.cumsum(axis=1))
+# print(ResultDF.cummax())
+# print(ResultDF.cummin())
+# print(ResultDF.diff())
+# print(ResultDF.div(10))
+# ResultDF.loc['Total'] = ResultDF.sum()
+# print(ResultDF)
+# print(ResultDF.where(ResultDF > 50, other = 0))
+
 
 
 dFrame10Mu1tip1es = pd.DataFrame([10, 20, 30 , 40, 50])
@@ -74,17 +84,30 @@ dFrame10Mu1tip1es = pd.DataFrame([10, 20, 30 , 40, 50])
 # print(ResultDF.loc[['Science', 'Maths']])
 
 
-# ResultSheet1=pd.DataFrame({'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi']),
-# 'Ramit': pd.Series([92, 81, 96],index=['Maths','Science','Hindi']), 
-# 'Samridhi': pd.Series([89, 91, 88], index=['Maths','Science','Hindi']),
-# 'Riya': pd.Series([81, 71, 67],index=['Maths','Science','Hindi']), 
-# 'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])})
+ResultSheet1=pd.DataFrame({'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi']),
+'Ramit': pd.Series([92, 81, 96],index=['Maths','Science','Hindi']), 
+'Samridhi': pd.Series([89, 91, 88], index=['Maths','Science','Hindi']),
+'Riya': pd.Series([81, 71, 67],index=['Maths','Science','Hindi']), 
+'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])})
 
-# ResultSheet2=pd.DataFrame({'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi']),
-# 'Ramit': pd.Series([92, 81, 96],index=['Maths','Science','Hindi']), 
-# 'Samridhi': pd.Series([89, 91, 88], index=['Maths','Science','Hindi']),
-# 'Riya': pd.Series([81, 71, 67],index=['Maths','Science','Hindi']), 
-# 'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])})
+ResultSheet2=pd.DataFrame({'Arnab': pd.Series([90, 91, 97], index=['Maths','Science','Hindi']),
+'Ramit': pd.Series([92, 81, 96],index=['Maths','Science','Hindi']), 
+'Samridhi': pd.Series([89, 91, 88], index=['Maths','Science','Hindi']),
+'Riya': pd.Series([81, 71, 67],index=['Maths','Science','Hindi']), 
+'Mallika': pd.Series([94, 95, 99],index=['Maths','Science','Hindi'])})
 
 # L = pd.concat([ResultSheet1, ResultSheet2])
 # print(L)
+# print(ResultSheet1.dot(ResultSheet2.T))
+# print(ResultSheet1.mul(ResultSheet2))
+
+
+People = [
+    {'first':'Peter', 'last':'Thomas', 'email':'peter@gmail.com'},
+    {'first':'Tanmay', 'last':'Agarwal', 'email':'tanman@gmail.com'},
+    {'first':'Sakhsham', 'last':'Agarwal', 'email':'sak@gmail.com'}
+]
+DF1 = pd.DataFrame(People)
+print(DF1, '\n\n\n')
+print(DF1.loc[(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')])
+print(DF1.loc[~(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')]) # not
