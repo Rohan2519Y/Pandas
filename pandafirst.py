@@ -101,6 +101,11 @@ ResultSheet2=pd.DataFrame({'Arnab': pd.Series([90, 91, 97], index=['Maths','Scie
 # print(ResultSheet1.dot(ResultSheet2.T))
 # print(ResultSheet1.mul(ResultSheet2))
 
+# People = {
+#     'A':{'first':'Peter', 'last':'Thomas', 'email':'peter@gmail.com'},
+#     'B':{'first':'Tanmay', 'last':'Agarwal', 'email':'tanman@gmail.com'},
+#     'C':{'first':'Sakhsham', 'last':'Agarwal', 'email':'sak@gmail.com'}
+# }
 
 People = [
     {'first':'Peter', 'last':'Thomas', 'email':'peter@gmail.com'},
@@ -108,6 +113,10 @@ People = [
     {'first':'Sakhsham', 'last':'Agarwal', 'email':'sak@gmail.com'}
 ]
 DF1 = pd.DataFrame(People)
-print(DF1, '\n\n\n')
-print(DF1.loc[(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')])
-print(DF1.loc[~(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')]) # not
+print(DF1, '\n\n')
+# print(DF1.loc[(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')])
+# print(DF1.loc[~(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')]) # not
+# print(DF1.loc[DF1['first'].str.contains('er')])
+# print(DF1.loc[DF1['last'].str.contains('ar')])
+# print(DF1.filter(items=[0, 1], axis = 0))
+# print(DF1.query('first == "Peter"'))
