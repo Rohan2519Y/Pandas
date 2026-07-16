@@ -113,10 +113,17 @@ People = [
     {'first':'Sakhsham', 'last':'Agarwal', 'email':'sak@gmail.com'}
 ]
 DF1 = pd.DataFrame(People)
-print(DF1, '\n\n')
+# print(DF1, '\n\n')
 # print(DF1.loc[(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')])
 # print(DF1.loc[~(DF1['last'] == 'Agarwal') & (DF1['email'] == 'tanman@gmail.com')]) # not
 # print(DF1.loc[DF1['first'].str.contains('er')])
 # print(DF1.loc[DF1['last'].str.contains('ar')])
 # print(DF1.filter(items=[0, 1], axis = 0))
 # print(DF1.query('first == "Peter"'))
+
+DF = pd.DataFrame({
+    'Year':[2000, 2000, 2000, 2001, 2001, 2002, 2003, 2003],
+    'Production' : [23, 78, 38, 97, 84, 17, 67, 48]
+})
+G = DF.groupby('Year')['Production'].sum()
+print(G)
