@@ -121,9 +121,43 @@ DF1 = pd.DataFrame(People)
 # print(DF1.filter(items=[0, 1], axis = 0))
 # print(DF1.query('first == "Peter"'))
 
-DF = pd.DataFrame({
-    'Year':[2000, 2000, 2000, 2001, 2001, 2002, 2003, 2003],
-    'Production' : [23, 78, 38, 97, 84, 17, 67, 48]
-})
-G = DF.groupby('Year')['Production'].sum()
-print(G)
+# DF = pd.DataFrame({
+#     'Year':[2000, 2000, 2000, 2001, 2001, 2002, 2003, 2003],
+#     'Production' : [23, 78, 38, 97, 84, 17, 67, 48]
+# })
+# G = DF.groupby('Year')['Production'].sum()
+# print(G)
+
+
+
+# raw_data_1 = {'subject_id': ['1', '2', '3', '4', '5'],'first_name': ['Alex', 'Amy', 'Allen', 'Alice', 'Ayoung'],'last_name': ['Anderson', 'Ackerman', 'Ali', 'Aoni', 'Atiches']}
+# raw_data_2 = {'subject_id': ['4', '5', '6', '7', '8'],'first_name': ['Billy', 'Brian', 'Bran', 'Bryce', 'Betty'],'last_name': ['Bonder', 'Black', 'Balwner', 'Brice', 'Btisan']}
+# raw_data_3 = {'subject_id': ['1', '2', '3', '4', '5', '7', '8', '9', '10', '11'],'test_id': [51, 15, 15, 61, 16, 14, 15, 1, 61, 16]}
+
+# Data1=pd.DataFrame(raw_data_1)
+# Data2=pd.DataFrame(raw_data_2)
+# Data3=pd.DataFrame(raw_data_3)
+
+
+# print(pd.merge(Data1, Data2))
+# print(pd.merge(Data1, Data2, left_on=['subject_id'], right_on=['subject_id']))
+# print(pd.merge(Data1, Data2, left_index=True, right_index=True))
+# print(pd.merge(Data1, Data2, how='left'))
+# print(Data1.join(Data3, lsuffix='A', rsuffix='B'))
+
+
+Data1={'productid':[100,200,300,400,500], 'productname':['Amul Ghee','Pepsi','Real Juice','Dawat Rice','Dove Shampoo'], 'rate':[700,20,120,700,300], 'offer':[600,18,110,300,100], }
+Data2={'productid':[200,500,200,100,400,200,0],'qtysale':[3,7,2,1,10,8,0]}
+Data3={'productid':[600,700], 'productname':['Amul Butter','Parle G'], 'rate':[700,20], 'offer':[300,18], }
+
+
+product1 = pd.DataFrame(Data1)
+product2 = pd.DataFrame(Data3)
+sales = pd.DataFrame(Data2)
+
+# DF3 = pd.merge(product1[["productid", "productname", "rate"]], sales, indicator=True)
+# DF3['amount'] = DF3['qtysale'] * DF3['rate']
+# print(DF3)
+
+DF4 = pd.concat([product1, product2], ignore_index=True)
+print(DF4)
