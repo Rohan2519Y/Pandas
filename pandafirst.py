@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
 # S = pd.Series([1, 2, 3, 4, 5])
 # S = pd.Series(['A', 'B', 'C', 'D'], index = [100, 200, 300, 400])
 # A = np.array(['Ha', 'Pe', 'Th', 'Vi'])
@@ -159,5 +162,25 @@ sales = pd.DataFrame(Data2)
 # DF3['amount'] = DF3['qtysale'] * DF3['rate']
 # print(DF3)
 
-DF4 = pd.concat([product1, product2], ignore_index=True)
-print(DF4)
+# DF4 = pd.concat([product1, product2], ignore_index=True)
+# print(DF4)
+
+df = pd.DataFrame({
+    'gender': ['male', 'male', 'female', 'female', 'male', 'female', 'male', 'female'],
+    'education_level': ['high school', 'college', 'college', 'graduate', 'high school', 'graduate', 'college', 'graduate'],
+    'score': [75, 82, 88, 95, 69, 92, 78, 85]
+})
+# print(df)
+
+ct = pd.crosstab(df['gender'], df['education_level'], margins=True)
+# ct = pd.crosstab(df['gender'], df['education_level'], values=df['score'], aggfunc='sum')
+# print(ct)
+
+
+DF = pd.DataFrame({
+    'Name' : ['Rahul', 'Pankaj', 'Mohan', 'Peter'], 'DOB':['11-07-2000', '11-02-2004', '17-11-2006', '10-04-2005']
+})
+DF['DOB'] = pd.to_datetime(DF['DOB'], dayfirst=True)
+DF['Month'] = pd.to_datetime(DF['DOB'], dayfirst=True).dt.month_name()
+DF['Week'] = pd.to_datetime(DF['DOB'], dayfirst=True).dt.strftime("%A")
+print(DF)
