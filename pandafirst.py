@@ -178,9 +178,13 @@ ct = pd.crosstab(df['gender'], df['education_level'], margins=True)
 
 
 DF = pd.DataFrame({
-    'Name' : ['Rahul', 'Pankaj', 'Mohan', 'Peter'], 'DOB':['11-07-2000', '11-02-2004', '17-11-2006', '10-04-2005']
+    'Name' : ['Rahul', 'Pankaj', 'Mohan', None], 'DOB':['11-07-2000', '11-02-2004', '17-11-2006', '10-04-2005']
 })
-DF['DOB'] = pd.to_datetime(DF['DOB'], dayfirst=True)
-DF['Month'] = pd.to_datetime(DF['DOB'], dayfirst=True).dt.month_name()
-DF['Week'] = pd.to_datetime(DF['DOB'], dayfirst=True).dt.strftime("%A")
-print(DF)
+# DF['DOB'] = pd.to_datetime(DF['DOB'], dayfirst=True)
+# DF['Month'] = pd.to_datetime(DF['DOB'], dayfirst=True).dt.month_name()
+# DF['Week'] = pd.to_datetime(DF['DOB'], dayfirst=True).dt.strftime("%A")
+# print(DF)
+# print(pd.Timestamp.now())
+# print(pd.Timestamp.today())
+# print(pd.Timestamp.today().year)
+print(DF.dropna())
