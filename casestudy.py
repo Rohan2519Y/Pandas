@@ -18,7 +18,7 @@ Transaction = pd.DataFrame(pd.read_csv('F:\Pandas\Transactions.csv'))
 
 Temp_Merge = pd.merge(Transaction, Customers, how='inner', left_on=['cust_id'], right_on=['customer_Id'])
 Customer_Final = pd.merge(Product_Hierarchy, Temp_Merge, how='inner', left_on=['prod_cat_code'], right_on=['prod_cat_code'])
-print(Customer_Final)
+# print(Customer_Final)
 print(Customer_Final.columns)
 
 
@@ -40,6 +40,7 @@ print(Customer_Final.columns)
 # print("Min : \n", Customer_Final['total_amt'].min, '\n\n')
 # print("Max : \n", Customer_Final['total_amt'].max, '\n\n')
 # print("Median  : \n", Customer_Final['total_amt'].median, '\n\n')
+# print(Customer_Final.describe())
 
 
 #       D - Frequency tables for all the categorical variables
@@ -112,3 +113,37 @@ print(Customer_Final.columns)
 
 # 7 - Which store type sells the maximum products by value and by quantity?
 # print(Customer_Final.groupby("Store_type")['Qty'].sum().idxmax())
+
+
+
+
+# 8 - What was the total amount earned from the "Electronics" and "Clothing" categories from Flagship Stores
+# FS = Customer_Final.loc[(Customer_Final['Store_type'] == 'Flagship store' ) & ((Customer_Final['prod_cat'] == 'Electronics') | (Customer_Final['prod_cat'] == 'Clothing'))]
+# print(FS['total_amt'].max())
+
+
+
+
+# 9 - What was the total amount earned from "Male" customers under the "Electronics" category?
+# ME = Customer_Final.loc[(Customer_Final['Gender'] == 'M') & (Customer_Final['prod_cat'] == 'Electronics')]
+# print(ME['total_amt'].sum())
+
+
+
+
+# 10 - How many customers have more than 10 unique transactions, after removing all transactions which have any negative amounts?
+# CT = Customer_Final.loc[Customer_Final['total_amt'] > 0].groupby('cust_id')['transaction_id'].nunique()
+# print(CT[CT > 10])
+# print(CT[CT > 10].count())
+
+
+
+
+# 11 - For all customers aged between 25 - 35, find out:
+CustAged = Customer_Final.loc[Customer_Final['tran_date'] == (pd.Timestamp.today().year() - pd.to_datetime(Customer_Final['tran_date'], dayfirst=True).year())]
+print(CustAged)
+#       A - What was the total amount spent for “Electronics” and “Books” product categories?
+
+
+
+#       B - What was the total amount spent by these customers between 1st Jan, 2014 to 1st Mar, 2014?

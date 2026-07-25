@@ -187,4 +187,27 @@ DF = pd.DataFrame({
 # print(pd.Timestamp.now())
 # print(pd.Timestamp.today())
 # print(pd.Timestamp.today().year)
-print(DF.dropna())
+# print(DF.dropna())
+
+
+DF = pd.DataFrame({
+    "Department":["IT", "HR", "HR", "IT", "SALES", "IT", "HR", "SALES"],
+    "City":["Gwalior", "Indore", "Indore", "Indore", "Gwalior", "Karachi", "Beijieng", "Banda"],
+    "Total":[100000, 340000, 200000, 500000, 900000, 690000, 1430000, 960000]
+})
+# DF = pd.DataFrame({
+#     "Total":[1, 2, None, None, None, 6, 7, 8],
+#     "Department":["IT", "HR", "HR", "IT", "SALES", "IT", "HR", "SALES"],
+#     "City":["Gwalior", "Indore", None, None, None, "Karachi", "Beijieng", "Banda"],
+# })
+# print(DF.dropna(how='all', thresh=2, subset=['city']))
+# DF = DF.fillna('Hat')
+# DF = DF.fillna(method='ffill')
+# DF = DF.fillna(value=1, limit=1)
+# print(DF.isnull())
+# print(DF.notnull())
+# DF['Total'] = pd.to_numeric(DF['Total'])
+# print(df.interpolate(method='linear'))
+# print(DF)
+# print(DF.duplicated(subset=['City'], keep='last'))
+# print(DF.drop_duplicates(subset=['City'], keep='last'))
