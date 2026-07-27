@@ -140,10 +140,16 @@ print(Customer_Final.columns)
 
 
 # 11 - For all customers aged between 25 - 35, find out:
-CustAged = Customer_Final.loc[Customer_Final['tran_date'] == (pd.Timestamp.today().year() - pd.to_datetime(Customer_Final['tran_date'], dayfirst=True).year())]
-print(CustAged)
-#       A - What was the total amount spent for “Electronics” and “Books” product categories?
+Customer_Final["DOB"] = pd.to_datetime(Customer_Final["DOB"], format="mixed", dayfirst=True, errors="coerce")
+Customer_Final['Age'] = (pd.Timestamp.today().year - Customer_Final['DOB'].dt.year)
+Cust_age = Customer_Final.loc[Customer_Final['Age'].between(25, 35)]
+# print(Cust_age)
 
+
+#       A - What was the total amount spent for “Electronics” and “Books” product categories?
+# print(Cust_age.loc[(Cust_age['prod_cat'] == 'Electronics') | (Cust_age['prod_cat'] == 'Books')]['total_amt'].sum())
 
 
 #       B - What was the total amount spent by these customers between 1st Jan, 2014 to 1st Mar, 2014?
+Cust_age['tran_date'] = pd.to_datetime(Cust_age['tran_date'], format='mixed', dayfirst=True, errors='coerce')
+print(Cust_age[(Cust_age['tran_date'] > '2014-01-01') & (Cust_age['tran_date'] < '2014-03-01') & ((Cust_age['prod_cat'] == 'Electronics') | (Cust_age['prod_cat'] == 'Books'))]['total_amt'].sum())
