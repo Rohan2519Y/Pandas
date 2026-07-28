@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 # pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 
-Customers = pd.DataFrame(pd.read_csv('F:\Pandas\Customer.csv'))
-Product_Hierarchy = pd.DataFrame(pd.read_csv('F:\Pandas\prod_cat_info.csv'))
-Transaction = pd.DataFrame(pd.read_csv('F:\Pandas\Transactions.csv'))
+Customers = pd.DataFrame(pd.read_csv('F:/Pandas/Customer.csv'))
+Product_Hierarchy = pd.DataFrame(pd.read_csv('F:/Pandas/prod_cat_info.csv'))
+Transaction = pd.DataFrame(pd.read_csv('F:/Pandas/Transactions.csv'))
 
 
 # print(Customers.columns, '\n')
@@ -16,10 +16,10 @@ Transaction = pd.DataFrame(pd.read_csv('F:\Pandas\Transactions.csv'))
 
 # 1 - Merge the datasets Customers, Product Hierarchy and Transactions as Customer_Final. Ensure tokeep all customers who have done transactions with us and select the join type accordingly. 
 
-Temp_Merge = pd.merge(Transaction, Customers, how='inner', left_on=['cust_id'], right_on=['customer_Id'])
-Customer_Final = pd.merge(Product_Hierarchy, Temp_Merge, how='inner', left_on=['prod_cat_code'], right_on=['prod_cat_code'])
+Temp_Merge = pd.merge(Transaction, Customers, left_on=['cust_id'], right_on=['customer_Id'])
+Customer_Final = pd.merge(Product_Hierarchy, Temp_Merge, left_on=['prod_cat_code'], right_on=['prod_cat_code'])
 # print(Customer_Final)
-print(Customer_Final.columns)
+# print(Customer_Final.columns)
 
 
 
@@ -37,7 +37,7 @@ print(Customer_Final.columns)
 
 
 #       C - “Five-number summary” for continuous variables (min, Q1, median, Q3 and max)
-# print("Min : \n", Customer_Final['total_amt'].min, '\n\n')
+# print("Min : \n", Customer_Final['total_amt'].min(), '\n\n')
 # print("Max : \n", Customer_Final['total_amt'].max, '\n\n')
 # print("Median  : \n", Customer_Final['total_amt'].median, '\n\n')
 # print(Customer_Final.describe())
@@ -53,6 +53,11 @@ print(Customer_Final.columns)
 
 
 # 3 - Generate histograms for all continuous variables and frequency bars for categorical variables.
+# plt.hist(Customer_Final['total_amt'], color='pink')
+# plt.title("City Code")
+# plt.show()
+
+
 # Customer_Final['city_code'].hist()
 # plt.title("City Code")
 # plt.show()
@@ -151,5 +156,5 @@ Cust_age = Customer_Final.loc[Customer_Final['Age'].between(25, 35)]
 
 
 #       B - What was the total amount spent by these customers between 1st Jan, 2014 to 1st Mar, 2014?
-Cust_age['tran_date'] = pd.to_datetime(Cust_age['tran_date'], format='mixed', dayfirst=True, errors='coerce')
-print(Cust_age[(Cust_age['tran_date'] > '2014-01-01') & (Cust_age['tran_date'] < '2014-03-01') & ((Cust_age['prod_cat'] == 'Electronics') | (Cust_age['prod_cat'] == 'Books'))]['total_amt'].sum())
+# Cust_age['tran_date'] = pd.to_datetime(Cust_age['tran_date'], format='mixed', dayfirst=True, errors='coerce')
+# print(Cust_age[(Cust_age['tran_date'] > '2014-01-01') & (Cust_age['tran_date'] < '2014-03-01') & ((Cust_age['prod_cat'] == 'Electronics') | (Cust_age['prod_cat'] == 'Books'))]['total_amt'].sum())
