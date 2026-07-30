@@ -111,7 +111,7 @@ Customer_Final = pd.merge(Product_Hierarchy, Temp_Merge, left_on=['prod_cat_code
 # city = Customer_Final.groupby("city_code")["cust_id"].nunique()
 
 # print("City Code:", city.idxmax())
-# print("Percentage:", (city.max() / city.sum()) * 100)
+# print("Percentage:", round((city.max() / city.sum()) * 100, 2))
 
 
 
@@ -123,8 +123,8 @@ Customer_Final = pd.merge(Product_Hierarchy, Temp_Merge, left_on=['prod_cat_code
 
 
 # 8 - What was the total amount earned from the "Electronics" and "Clothing" categories from Flagship Stores
-# FS = Customer_Final.loc[(Customer_Final['Store_type'] == 'Flagship store' ) & ((Customer_Final['prod_cat'] == 'Electronics') | (Customer_Final['prod_cat'] == 'Clothing'))]
-# print(FS['total_amt'].max())
+FS = Customer_Final.loc[(Customer_Final['Store_type'] == 'Flagship store' ) & ((Customer_Final['prod_cat'] == 'Electronics') | (Customer_Final['prod_cat'] == 'Clothing'))]
+print(FS['total_amt'].sum())
 
 
 
@@ -148,7 +148,7 @@ Customer_Final = pd.merge(Product_Hierarchy, Temp_Merge, left_on=['prod_cat_code
 Customer_Final["DOB"] = pd.to_datetime(Customer_Final["DOB"], format="mixed", dayfirst=True, errors="coerce")
 Customer_Final['Age'] = (pd.Timestamp.today().year - Customer_Final['DOB'].dt.year)
 Cust_age = Customer_Final.loc[Customer_Final['Age'].between(25, 35)]
-# print(Cust_age)
+print(Cust_age)
 
 
 #       A - What was the total amount spent for “Electronics” and “Books” product categories?
