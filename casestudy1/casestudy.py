@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 # pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 
-Customers = pd.DataFrame(pd.read_csv('F:/Pandas/Customer.csv'))
-Product_Hierarchy = pd.DataFrame(pd.read_csv('F:/Pandas/prod_cat_info.csv'))
-Transaction = pd.DataFrame(pd.read_csv('F:/Pandas/Transactions.csv'))
+Customers = pd.DataFrame(pd.read_csv('F:/Pandas/casestudy1/Customer.csv'))
+Product_Hierarchy = pd.DataFrame(pd.read_csv('F:/Pandas/casestudy1/prod_cat_info.csv'))
+Transaction = pd.DataFrame(pd.read_csv('F:/Pandas/casestudy1/Transactions.csv'))
 
 
 # print(Customers.columns, '\n')
