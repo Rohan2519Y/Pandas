@@ -28,12 +28,11 @@ print(Full_Merge)
 #           B - In case spend amount is more than the limit, replace it with 50% of that customer’s limit.  
 #           (customer’s limit provided in acquisition table is the per transaction limit on his card)
 
-# Full_Merge['Final_Limit'] = Full_Merge.loc[Full_Merge['Amount_Spend'] > Full_Merge['Limit']]['Limit'] * 0.5
-# Full_Merge['Final_Limit'] = Full_Merge['Final_Limit'].fillna(0)
-# print(Full_Merge.loc[ :,['Limit', 'Final_Limit']])
+# Full_Merge.loc[Full_Merge['Amount_Spend'] > Full_Merge['Limit'], 'Amount_Spend']= Full_Merge['Limit'] * 0.5
+# print(Full_Merge.loc[ :,['Limit', 'Amount_Spend']])
 
 
 #           C - Incase the repayment amount is more than the limit, replace the repayment with the limit.
 
-Full_Merge.loc[Full_Merge['Amount_Repay'] > Full_Merge['Limit'], 'Amount_Repay'] = Full_Merge['Limit']
-print(Full_Merge.loc[Full_Merge['Amount_Repay'] > Full_Merge['Limit']]['Limit'])
+# Full_Merge.loc[Full_Merge['Amount_Repay'] > Full_Merge['Limit'], 'Amount_Repay'] = Full_Merge['Limit']
+# print(Full_Merge.loc[:,['Limit', 'Amount_Repay']])
