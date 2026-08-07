@@ -15,7 +15,7 @@ Full_Merge = pd.merge(Repayment, (pd.merge(Customer_Acquisition, Spend, on=['Cus
 # print(Spend)
 # print(Repayment)
 
-print(Full_Merge)
+# print(Full_Merge)
 
 # 1. In the above dataset
 #           A - In case age is less than 18, replace it with mean of age values
@@ -36,3 +36,10 @@ print(Full_Merge)
 
 # Full_Merge.loc[Full_Merge['Amount_Repay'] > Full_Merge['Limit'], 'Amount_Repay'] = Full_Merge['Limit']
 # print(Full_Merge.loc[:,['Limit', 'Amount_Repay']])
+
+
+
+
+# 2. From the above dataset create the following summaries: 
+#           A - How many distinct customers exist?
+print(Customer_Acquisition.groupby('Customer').size().count())
