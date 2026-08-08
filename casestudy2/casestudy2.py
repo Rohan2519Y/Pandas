@@ -42,4 +42,15 @@ Full_Merge = pd.merge(Repayment, (pd.merge(Customer_Acquisition, Spend, on=['Cus
 
 # 2. From the above dataset create the following summaries: 
 #           A - How many distinct customers exist?
-print(Customer_Acquisition.groupby('Customer').size().count())
+# print(Customer_Acquisition.groupby('Customer').size().count())
+
+
+
+
+#           B - How many distinct categories exist?
+# print(Customer_Acquisition.groupby('Segment').size().count())
+
+
+
+
+#           C - What is the average monthly spend by customers?
