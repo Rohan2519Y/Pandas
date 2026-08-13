@@ -28,7 +28,7 @@ Full_Merge = pd.merge(Repayment, (pd.merge(Customer_Acquisition, Spend, on=['Cus
 #           B - In case spend amount is more than the limit, replace it with 50% of that customer’s limit.  
 #           (customer’s limit provided in acquisition table is the per transaction limit on his card)
 
-# Full_Merge.loc[Full_Merge['Amount_Spend'] > Full_Merge['Limit'], 'Amount_Spend']= Full_Merge['Limit'] * 0.5
+# Full_Merge.loc[Full_Merge['Amount_Spend'] > Full_Merge['Limit'], 'Amount_Spend'] = Full_Merge['Limit'] * 0.5
 # print(Full_Merge.loc[ :,['Limit', 'Amount_Spend']])
 
 
@@ -54,3 +54,12 @@ Full_Merge = pd.merge(Repayment, (pd.merge(Customer_Acquisition, Spend, on=['Cus
 
 
 #           C - What is the average monthly spend by customers?
+Spend['Monthname'] = pd.to_datetime(Spend['Month'], dayfirst=True).dt.month_name()
+# print(Spend.groupby(['Monthname'])['Amount'].mean())
+
+
+
+
+#           D - What is the average monthly repayment by customers? 
+Repayment['Monthname'] = pd.to_datetime(Spend['Month'], dayfirst=True).dt.month_name()
+print(Repayment.groupby(['Monthname'])['Amount'].mean())
