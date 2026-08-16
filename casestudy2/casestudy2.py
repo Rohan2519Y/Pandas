@@ -9,7 +9,10 @@ Spend = pd.read_csv('F:/Pandas/casestudy2/spend.csv')
 Repayment = pd.read_csv('F:/Pandas/casestudy2/Repayment.csv')
 
 Full_Merge = pd.merge(Repayment, (pd.merge(Customer_Acquisition, Spend, on=['Customer'])), on=['Customer'], suffixes=('_Repay', '_Spend'))
-
+Full_Merge['SpendMonthname'] = pd.to_datetime(Spend['Month'], dayfirst=True, format='mixed').dt.month_name()
+Full_Merge['RepayMonthname'] = pd.to_datetime(Repayment['Month'], dayfirst=True, format='mixed').dt.month_name()
+Full_Merge['SpendYear'] = pd.to_datetime(Spend['Month'], dayfirst=True, format='mixed').dt.year.astype(int)
+Full_Merge['RepayYear'] = pd.to_datetime(Repayment['Month'], dayfirst=True, format='mixed').dt.year.astype(int)
 
 # print(Customer_Acquisition)
 # print(Spend)
@@ -54,12 +57,68 @@ Full_Merge = pd.merge(Repayment, (pd.merge(Customer_Acquisition, Spend, on=['Cus
 
 
 #           C - What is the average monthly spend by customers?
-Spend['Monthname'] = pd.to_datetime(Spend['Month'], dayfirst=True).dt.month_name()
+Spend['Monthname'] = pd.to_datetime(Spend['Month'], dayfirst=True, format='mixed').dt.month_name()
 # print(Spend.groupby(['Monthname'])['Amount'].mean())
 
 
 
 
 #           D - What is the average monthly repayment by customers? 
-Repayment['Monthname'] = pd.to_datetime(Spend['Month'], dayfirst=True).dt.month_name()
-print(Repayment.groupby(['Monthname'])['Amount'].mean())
+Repayment['Monthname'] = pd.to_datetime(Spend['Month'], dayfirst=True, format='mixed').dt.month_name()
+# print(Repayment.groupby(['Monthname'])['Amount'].mean())
+
+
+
+
+#           E - If the monthly rate of interest is 2.9%, what is the profit for the bank for each month? 
+#           (Profit is defined as interest earned on Monthly Profit. Monthly Profit = Monthly 
+#           repayment  – Monthly spend. Interest is earned only on positive profits and not on negative amounts) 
+SpendMonthProfit = Full_Merge.groupby(['SpendMonthname'])['Amount_Spend'].sum()
+RepayMonthProfit = Full_Merge.groupby(['RepayMonthname'])['Amount_Repay'].sum()
+# print(SpendMonthProfit)
+# print(RepayMonthProfit)
+# print((RepayMonthProfit - SpendMonthProfit)[(RepayMonthProfit - SpendMonthProfit) > 0] * 0.029)
+
+
+
+
+#              F - What are the top 5 product types? 
+# print(Spend.groupby(['Type']).count().nlargest(5, 'Customer').iloc[:, 0])
+
+
+
+
+#              G - Which city is having maximum spend?
+# print(Full_Merge.groupby(['City'])['Amount_Spend'].sum().nlargest(1)) 
+
+
+
+
+#              H - Which age group is spending more money?
+# print(Full_Merge.groupby(['Age'])['Amount_Spend'].sum().nlargest(1))
+
+
+
+
+#              I - Who are the top 10 customers in terms of repayment?
+# print(Full_Merge.groupby(['Customer'])['Amount_Spend'].sum().nlargest(10))
+
+
+
+
+# 3 - Calculate the city wise spend on each product on yearly basis. Also include a graphical representation for the same.
+Spend_Prdt = Full_Merge.groupby(['City', 'Type', 'SpendYear'])['Amount_Spend'].sum().reset_index()
+# print(Spend_Prdt)
+for city in Spend_Prdt['City'].unique():
+    data = Spend_Prdt[Spend_Prdt['City'] == city]
+
+    plt.bar(
+        data['SpendYear'].astype(str) + '-' + data['Type'],
+        data['Amount_Spend']
+    )
+
+plt.title(f'Yearly Spend by Product - {city}')
+plt.xlabel('Year - Product')
+plt.ylabel('Amount Spend')
+plt.xticks(rotation=45)
+plt.show()
