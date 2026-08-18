@@ -109,16 +109,36 @@ RepayMonthProfit = Full_Merge.groupby(['RepayMonthname'])['Amount_Repay'].sum()
 # 3 - Calculate the city wise spend on each product on yearly basis. Also include a graphical representation for the same.
 Spend_Prdt = Full_Merge.groupby(['City', 'Type', 'SpendYear'])['Amount_Spend'].sum().reset_index()
 # print(Spend_Prdt)
-for city in Spend_Prdt['City'].unique():
-    data = Spend_Prdt[Spend_Prdt['City'] == city]
+# for city in Spend_Prdt['City'].unique():
+#     data = Spend_Prdt[Spend_Prdt['City'] == city]
 
-    plt.bar(
-        data['SpendYear'].astype(str) + '-' + data['Type'],
-        data['Amount_Spend']
-    )
+#     plt.bar(
+#         data['SpendYear'].astype(str) + '-' + data['Type'],
+#         data['Amount_Spend']
+#     )
 
-plt.title(f'Yearly Spend by Product - {city}')
-plt.xlabel('Year - Product')
-plt.ylabel('Amount Spend')
-plt.xticks(rotation=45)
+# plt.title(f'Yearly Spend by Product - {city}')
+# plt.xlabel('Year - Product')
+# plt.ylabel('Amount Spend')
+# plt.xticks(rotation=45)
+# plt.show()
+
+
+
+
+#  4 - Create Graph for
+#               A - Monthly comparison of total spends, city wise
+# Chart = Full_Merge.groupby(['City'])['Amount_Spend'].sum()
+# plt.bar(Chart.index, Chart.values)
+# plt.show()
+# print(Chart.index)
+
+
+
+
+#               B - Comparison of yearly spend on air tickets
+Spend['Year'] = pd.to_datetime(Spend['Month'], dayfirst=True, format='mixed').dt.year.astype(int)
+Chart = Spend.loc[Spend['Type'] == 'AIR TICKET'].groupby(['Year']).count()
+plt.bar(Chart.index.astype(str), Chart['Month'])
 plt.show()
+# print(Chart.index)
