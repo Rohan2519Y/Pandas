@@ -191,9 +191,9 @@ DF = pd.DataFrame({
 
 
 DF = pd.DataFrame({
-    "Department":["IT", "HR", "HR", "IT", "SALES", "IT", "HR", "SALES"],
-    "City":["Gwalior", "Indore", "Indore", "Indore", "Gwalior", "Karachi", "Beijieng", "Banda"],
-    "Total":[100000, 340000, 200000, 500000, 900000, 690000, 1430000, 960000]
+    "Department":["IT", "HR", "IT", "SALES", "IT", "HR", "SALES"],
+    "City":["Gwalior", "Indore", "Indore", "Gwalior", "Karachi", "Beijieng", "Banda"],
+    "Total":[100000, 340000, 500000, 900000, 690000, 1430000, 960000]
 })
 # DF = pd.DataFrame({
 #     "Total":[1, 2, None, None, None, 6, 7, 8],
@@ -211,3 +211,7 @@ DF = pd.DataFrame({
 # print(DF)
 # print(DF.duplicated(subset=['City'], keep='last'))
 # print(DF.drop_duplicates(subset=['City'], keep='last'))
+
+# Result = DF.pivot(index='Department', columns='City', values='Total')
+Result = DF.pivot_table(index='Department', columns='City', values='Total', aggfunc=['count'])
+print(Result)
