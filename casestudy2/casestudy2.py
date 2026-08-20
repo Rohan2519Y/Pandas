@@ -138,7 +138,46 @@ Spend_Prdt = Full_Merge.groupby(['City', 'Type', 'SpendYear'])['Amount_Spend'].s
 
 #               B - Comparison of yearly spend on air tickets
 Spend['Year'] = pd.to_datetime(Spend['Month'], dayfirst=True, format='mixed').dt.year.astype(int)
-Chart = Spend.loc[Spend['Type'] == 'AIR TICKET'].groupby(['Year']).count()
-plt.bar(Chart.index.astype(str), Chart['Month'])
-plt.show()
+# Chart = Spend.loc[Spend['Type'] == 'AIR TICKET'].groupby(['Year']).count()
+# plt.bar(Chart.index.astype(str), Chart['Month'])
+# plt.show()
 # print(Chart.index)
+
+
+
+
+#               C - Comparison of monthly spend for each product (look for any seasonality that exists in terms of spend) 
+
+# Chart = Spend.groupby(['Monthname', 'Type'])['Amount'].sum().reset_index()
+
+# for product in Chart['Type'].unique():
+#     Data = Chart[Chart['Type'] == product]
+#     plt.plot(Data['Monthname'], Data['Amount'], marker='o', label=product)
+
+# plt.xlabel('Month')
+# plt.ylabel('Amount Spend')
+# plt.title('Monthly Spend for Each Product')
+# plt.legend()
+# plt.xticks(rotation=45)
+# plt.show()
+
+
+
+
+# 5 -          Write user defined PYTHON function to perform the following analysis: 
+#           You need to find top 10 customers for each city in terms of their repayment amount by 
+#           different products and by different time periods i.e. year or month. The user should be able 
+#           to specify the product (Gold/Silver/Platinum) and time period (yearly or monthly) and the 
+#           function should automatically take these inputs while identifying the top 10 customers. 
+
+def TopCustomer(product, period):
+    if period == 'Y':
+        p = 'RepayYear'
+    else:
+        p = 'RepayMonthname'
+
+    prod = Full_Merge[Full_Merge['Product'] == product]
+
+    return prod.groupby(['City', p, 'Customer'])['Amount_Repay'].sum().groupby(level=[0, 1]).nlargest(10)
+
+print(TopCustomer('Gold', 'Y'))
