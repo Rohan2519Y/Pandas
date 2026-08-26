@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 pd.set_option('display.max_columns', None)
+# pd.set_option('display.max_rows', None)
 
 
 # 1 -   Import claims_data.csv and cust_data.csv which is provided to you and 
@@ -23,8 +24,8 @@ Claim_Cust = pd.merge(Claim, Customer, left_on=['customer_id'], right_on=['CUST_
 #       mismatch within the current datatypes of the columns and their 
 #       business significance.
 
-Claim_Cust['claim_date'] = pd.to_datetime(Claim_Cust['claim_date'])
-Claim_Cust['DateOfBirth'] = pd.to_datetime(Claim_Cust['DateOfBirth'])
+Claim_Cust['claim_date'] = pd.to_datetime(Claim_Cust['claim_date'], format='mixed')
+Claim_Cust['DateOfBirth'] = pd.to_datetime(Claim_Cust['DateOfBirth'], format='mixed')
 # print(Claim_Cust.dtypes)
 
 
@@ -42,3 +43,30 @@ Claim_Cust['claim_amount'] = pd.to_numeric(Claim_Cust['claim_amount'].str.replac
 # 4 -   Of all the injury claims, some of them have gone unreported with the 
 #       police. Create an alert flag (1,0) for all such claims.
 
+Claim['Flag'] = 0
+Claim.loc[Claim['police_report'] == 'No', 'Flag'] = 1
+# print(Claim)
+
+
+
+
+# 5 -   One customer can claim for insurance more than once and in each 
+#       claim, multiple categories of claims can be involved. However, customer 
+#       ID should remain unique.  
+#       Retain the most recent observation and delete any duplicated records in 
+#       the data based on the customer ID column.
+
+# print(Claim_Cust.sort_values(by='claim_date', ascending=False).groupby(['customer_id']).first())
+
+
+
+
+# 6 -   Check for missing values and impute the missing values with an 
+#       appropriate value. (mean for continuous and mode for categorical)
+
+Claim['claim_amount'] = Claim['claim_amount'].str.replace('$', '', regex=False)
+Claim['claim_amount'] = Claim['claim_amount'].astype(float)
+Claim['claim_amount'] = Claim['claim_amount'].fillna(Claim['claim_amount'].mean())
+
+Claim['total_policy_claims'] = Claim['total_policy_claims'].fillna(Claim['total_policy_claims'].mean())
+print(Claim)
