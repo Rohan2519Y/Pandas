@@ -16,6 +16,7 @@ Claim_Cust = pd.merge(Claim, Customer, left_on=['customer_id'], right_on=['CUST_
 # print(Claim)
 # print(Customer)
 # print(Claim_Cust)
+Customer['DateOfBirth'] = pd.to_datetime(Customer['DateOfBirth'], format='mixed')
 
 
 
@@ -66,7 +67,56 @@ Claim.loc[Claim['police_report'] == 'No', 'Flag'] = 1
 
 Claim['claim_amount'] = Claim['claim_amount'].str.replace('$', '', regex=False)
 Claim['claim_amount'] = Claim['claim_amount'].astype(float)
+Claim_Cust['claim_amount'] = Claim_Cust['claim_amount'].replace('$', '', regex=False)
+Claim_Cust['claim_amount'] = Claim_Cust['claim_amount'].astype(float)
 Claim['claim_amount'] = Claim['claim_amount'].fillna(Claim['claim_amount'].mean())
 
 Claim['total_policy_claims'] = Claim['total_policy_claims'].fillna(Claim['total_policy_claims'].mean())
-print(Claim)
+# print(Claim)
+
+
+
+
+# 7 -   Calculate the age of customers in years. Based on the age, categorize 
+#       the customers according to the below criteria 
+#       Children < 18 
+#       Youth     18-30 
+#       Adult     30-60 
+#       Senior   > 60
+
+Customer.loc[
+    Customer['DateOfBirth'].dt.year > 2026,
+    'DateOfBirth'
+] -= pd.DateOffset(years=100)
+Customer['Age'] = pd.Timestamp.today().year - Customer['DateOfBirth'].dt.year
+Customer['AgeGroup'] = pd.cut(Customer['Age'], bins=[0, 18, 30, 60, float('inf')], labels=['Children', 'Youth', 'Adult', 'Senior'], right=False)
+Claim_Cust['Age'] = pd.Timestamp.today().year -Claim_Cust['DateOfBirth'].dt.year
+Claim_Cust['AgeGroup'] = pd.cut(Claim_Cust['Age'], bins=[0, 18, 30, 60, float('inf')], labels=['Children', 'Youth', 'Adult', 'Senior'], right=False)
+# print(Customer['AgeGroup'])
+
+
+
+
+# 8 -   What is the average amount claimed by the customers from various segments?
+# print(Claim_Cust.groupby(['Segment'])['claim_amount'].mean())
+
+
+
+
+# 9 -   What is the total claim amount based on incident cause for all the 
+#       claims that have been done at least 20 days prior to 1st of October, 2018.
+
+Claim['claim_date'] = pd.to_datetime(Claim['claim_date'])
+filteredDate = pd.to_datetime('10/01/2018') - pd.Timedelta(days=20)
+# print(Claim[Claim['claim_date'] <= filteredDate].groupby('incident_cause')['claim_amount'].sum())
+
+
+
+
+# 10 -  How many adults from TX, DE and AK claimed insurance for driver related issues and causes?
+
+# print(Claim_Cust.query('AgeGroup == "Adult" and State in ("TX", "DE", "AK") and incident_cause in ("Driver error", "Other driver error")'))
+
+
+
+
