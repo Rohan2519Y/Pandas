@@ -120,3 +120,58 @@ filteredDate = pd.to_datetime('10/01/2018') - pd.Timedelta(days=20)
 
 
 
+# 11 -  Draw a pie chart between the aggregated value of claim amount based on gender and segment. 
+#       Represent the claim amount as a percentage on the pie chart. 
+
+GenderPie = Claim_Cust.groupby(['gender', 'Segment'])['claim_amount'].sum()
+# print(Pie)
+
+# plt.pie(GenderPie, labels=[f'{gender} - {segment}' for gender, segment in GenderPie.index])
+# plt.title("Gender and Segment Pie Chart")
+# plt.legend()
+# plt.show()
+
+
+
+
+# 12 -  Among males and females, which gender had claimed the most for any type of driver related issues? 
+#       E.g. This metric can be compared using a bar chart
+
+ClaimGender = Claim_Cust.query('incident_cause in ("Driver error", "Other driver error")').groupby(['gender'])['claim_amount'].sum()
+# plt.bar(ClaimGender.index, ClaimGender)
+# plt.title("Gender Claim Amount Bar Chart")
+# plt.show()
+
+
+
+
+# 13 -  Which age group had the maximum fraudulent policy claims? Visualize it on a bar chart.
+
+# AgeGroupClaims = Claim_Cust.query('fraudulent == "Yes"').groupby(['AgeGroup'])['fraudulent'].count()
+# plt.bar(AgeGroupClaims.index, AgeGroupClaims)
+# plt.title('Fraudulent Policy Claims')
+# plt.show()
+
+
+
+
+# 14 -  Visualize the monthly trend of the total amount that has been claimed by the customers. 
+#       Ensure that on the “month” axis, the month is in a chronological order not alphabetical order.
+
+Claim_Cust['claim_month']= pd.to_datetime(Claim_Cust['claim_date']).dt.month_name()
+Claim_Cust['claim_month_no']= pd.to_datetime(Claim_Cust['claim_date']).dt.month
+# MonthlyTrend = Claim_Cust.groupby(['claim_month_no', 'claim_month'])['claim_amount'].sum().sort_index()
+# print(MonthlyTrend.index.get_level_values(1))
+
+# plt.plot(MonthlyTrend.index.get_level_values(1), MonthlyTrend.index.get_level_values(0), marker='o', linewidth=2)
+# plt.show()
+
+
+
+
+# 15 -  What is the average claim amount for gender and age categories and suitably represent the above using a facetted bar chart, 
+#       one facet that represents fraudulent claims and the other for non-fraudulent claims.
+
+# Facetted = Claim_Cust.groupby(['gender', 'AgeGroup', 'fraudulent'])['claim_amount'].mean().unstack()
+# Facetted.plot(kind='bar', figsize=(10, 6), stacked=True)
+# plt.show()
